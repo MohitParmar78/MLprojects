@@ -33,7 +33,7 @@ def evaluate_models(X_train, y_train, X_test, y_test,models,param):
             gcv=GridSearchCV(model,params,cv=3)
             gcv.fit(X_train, y_train)
             
-            model.set_params(**gcv.best_params_)
+            model.set_params(**gcv.best_params_) # ** use to unpack dict
             model.fit(X_train, y_train)
             
             
@@ -49,4 +49,12 @@ def evaluate_models(X_train, y_train, X_test, y_test,models,param):
     
     except Exception as e:
         logging.error("Error occurred while evaluating models")
+        raise CustomException(e, sys)
+    
+def load_object(file_path):
+    try:
+        with open(file_path, 'rb') as file_obj:
+            return dill.load(file_obj)
+    except Exception as e:
+        logging.error("Error occurred while loading object")
         raise CustomException(e, sys)

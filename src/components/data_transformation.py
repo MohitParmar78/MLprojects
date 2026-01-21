@@ -112,5 +112,5 @@ class DataTransformation:
             )
             
         except Exception as e:
-            logging.info("Error occurred in data transformation")
+            logging.error("Error occurred in data transformation")
             raise CustomException(e, sys) 
